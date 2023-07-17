@@ -8,8 +8,8 @@ df = pd.read_csv('ratings.csv')
 # Criando uma tabela de classificação de usuários e filmes
 ratings = df.pivot_table(index='userId', columns='movieId', values='rating')
 
-# Displaying the original ratings table
-print("Original ratings table:")
+# Exibindo a tabela de classificações original
+print("Tabela Original de notas:")
 print(ratings)
 
 # Criando uma matriz de classificação de usuários e filmes
@@ -22,8 +22,8 @@ imputed_ratings_matrix = imputer.fit_transform(ratings_matrix)
 # Criando uma tabela de classificação de usuários e filmes com valores imputados
 imputed_ratings = pd.DataFrame(imputed_ratings_matrix, index=ratings.index, columns=ratings.columns)
 
-# Displaying the imputed ratings table
-print("\nImputed ratings table:")
+# Exibindo a tabela de classificações imputadas
+print("\nMatrix com valores recomendados:")
 print(imputed_ratings)
 
 # Salvando a tabela imputada em um arquivo CSV
