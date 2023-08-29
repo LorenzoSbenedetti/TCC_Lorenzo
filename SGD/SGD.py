@@ -51,8 +51,8 @@ if __name__ == '__main__':
     
     num_epochs = 9
     limite_erro = 0.9
-    lr =  0.005
-    reg = 0.2
+    lr =  0.001
+    reg = 0.05
 
     Treino= df.copy()
     print('Este e o Treino :')
