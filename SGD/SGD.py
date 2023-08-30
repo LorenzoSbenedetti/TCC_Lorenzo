@@ -6,7 +6,7 @@ import time
 if __name__ == '__main__':
     np.random.seed(0)
     d = 10
-    df = pd.read_csv('rating.csv')
+    df = pd.read_csv('ratings.csv')
 
     num_usuarios = df['userId'].nunique() + 1
     num_filmes = df['movieId'].nunique() + 1
