@@ -5,8 +5,8 @@ import time
 
 if __name__ == '__main__':
     np.random.seed(0)
-    d = 10
-    df = pd.read_csv('ratings.csv')
+    d = 200
+    df = pd.read_csv('rating.csv')
 
     num_usuarios = df['userId'].nunique() + 1
     num_filmes = df['movieId'].nunique() + 1
@@ -51,7 +51,7 @@ if __name__ == '__main__':
     print(Treino)
 
     # Abre o arquivo para escrita
-    with open('Resultados.txt', 'w') as arquivo_resultados:
+    with open('Resultados.txt', 'w') as arquivo_resultados:  
         for epoch in range(num_epochs):
             print('Época:', epoch + 1)
 
@@ -79,18 +79,15 @@ if __name__ == '__main__':
                 break
 
         print(f'Fatoração concluída após {epoch + 1} épocas')
-
+        # Escreve o tempo de execução no arquivo
+        start_time = time.time()  
         previsoes = [np.dot(P[usuario_id_to_idx[usuario]], Q[filme_id_to_idx[filme]])
                      for usuario, filme in zip(Teste['userId'], Teste['movieId'])]
         rmse_teste = mean_squared_error(Teste['rating'], previsoes, squared=False)
-
+        end_time = time.time()
+        elapsed_time = end_time - start_time
+        arquivo_resultados.write(f'Tempo de execução: {elapsed_time:.2f} segundos\n')
+        print(f'Tempo de execução: {elapsed_time:.2f} segundos')
         # Escreve o resultado do RMSE de teste no arquivo
         arquivo_resultados.write(f'RMSE do Teste: {rmse_teste}\n')
 
-        end_time = time.time()
-        elapsed_time = end_time - start_time
-
-        # Escreve o tempo de execução no arquivo
-        arquivo_resultados.write(f'Tempo de execução: {elapsed_time:.2f} segundos\n')
-
-    print(f'Tempo de execução: {elapsed_time:.2f} segundos')
